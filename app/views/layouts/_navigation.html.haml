@@ -1,0 +1,16 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand(href="/") Mobile Event Gallery
+      .container.nav-collapse
+        %ul.nav.pull-left
+          %li= link_to "Home", root_path
+        %ul.nav.pull-right
+          - if admin_signed_in?
+            %li= link_to "Sign out", destroy_admin_session_path, method: "DELETE"
+          - else
+            %li= link_to "Sign in", new_admin_session_path

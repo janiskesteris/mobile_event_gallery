@@ -1,0 +1,90 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/janis/code/mobile_event_gallery/app/models/admin.rb": [
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/helpers/approved_images_helper.rb": [
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/controllers/approved_images_controller.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/models/ability.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1353764352
+  },
+  "Cucumber Features": {
+    "coverage": {
+      "/home/janis/code/mobile_event_gallery/app/models/admin.rb": [
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/helpers/approved_images_helper.rb": [
+        1,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/controllers/approved_images_controller.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/home/janis/code/mobile_event_gallery/app/models/ability.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1353763917
+  }
+}

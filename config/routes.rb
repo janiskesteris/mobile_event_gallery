@@ -1,4 +1,8 @@
 MobileEventGallery::Application.routes.draw do
+  devise_for :admins
+
+  root :to => "approved_images#index"
+  resources :approved_images, only: [:index, :show]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
