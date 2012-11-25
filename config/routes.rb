@@ -3,6 +3,10 @@ MobileEventGallery::Application.routes.draw do
 
   root :to => "approved_images#index"
   resources :approved_images, only: [:index, :show]
+  resources :admins, only: [] do
+    resources :pending_images, except: [:edit, :update]
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
