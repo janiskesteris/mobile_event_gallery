@@ -1,6 +1,0 @@
-%h1 Newest unapproved images
-%ul.thumbnails
-  - @pending_images.each do |image|
-    %li.span3
-      .thumbnail
-        = link_to image_tag(image.photo.list.url, height: "100"), image.photo.url

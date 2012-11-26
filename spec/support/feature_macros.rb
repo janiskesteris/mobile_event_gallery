@@ -14,6 +14,18 @@ module FeatureMacros
     admin
   end
 
+  def click_approve_button image
+    within "#image_block_#{image.id}" do
+      click_button "Approve"
+    end
+  end
+
+  def click_reject_button image
+    within "#image_block_#{image.id}" do
+      click_link "Reject"
+    end
+  end
+
 end
 
 RSpec.configuration.include FeatureMacros, :type => :feature

@@ -10,7 +10,7 @@
         %ul.nav.pull-left
           %li= link_to "Home", root_path
           - if admin_signed_in?
-            %li= link_to "Pending images", new_admin_pending_image_path(admin_id: current_admin)
+            %li= link_to "Pending images", new_admin_image_path(admin_id: current_admin)
         %ul.nav.pull-right
           - if admin_signed_in?
             %li= link_to "Sign out", destroy_admin_session_path, method: "DELETE"
