@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe PendingImagesController do
+  before(:each) do
+    stub_empty_json_images_request
+  end
 
   describe Ability do
     context "when visiting as guest" do

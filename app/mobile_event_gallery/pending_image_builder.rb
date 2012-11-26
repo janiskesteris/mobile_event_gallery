@@ -11,7 +11,7 @@ module PendingImage
     private
 
     def valid_images
-      @valid_images ||= initialized_images.select { |image| image.valid? }
+      @valid_images ||= initialized_images.select { |image| image.import_remote_photo! and image.valid? }
     end
 
     def initialized_images

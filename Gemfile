@@ -26,14 +26,16 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'fabrication'
+  gem 'faker'
+end
+
+group :test do
+  gem 'webmock'
   gem 'capybara'
   gem 'rspec-rails'
   gem 'simplecov', :require => false
-  gem 'fabrication'
-  gem 'faker'
   gem "email_spec"
   gem "database_cleaner"
   gem "fuubar"
-  gem 'webmock'
 end

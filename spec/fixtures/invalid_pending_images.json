@@ -9,7 +9,7 @@
     "content-type":"binary/octet-stream",
     "content-length":"1687517",
     "server":"AmazonS3",
-    "url":"new_image_1.jpg"
+    "url":"http://fakeimage.com/image.jpg"
   },
   {
     "x-amz-id-2":"Z4z1PluJ63VWMTndqnM5gZU1Pw4bkwwz4bPpunY+P1PASMd8RQFYC2D1xq0mnc0h",
@@ -32,6 +32,6 @@
     "accept-ranges":"bytes",
     "content-length":"468383",
     "server":"AmazonS3",
-    "url":"new_image_3.jpg"
+    "url":"http://fakeimage.com/image.jpg"
   }
 ]

@@ -10,7 +10,7 @@ describe PendingImage::Collection do
 
     context "with no excluded messages" do
       subject { PendingImage::Collection.new(all_pending_images).filtered_images }
-      it { should eql_image_etags(all_pending_images.map(&:etag)) }
+      it { should eql_image_etags(["etag1", "etag2", "etag3"]) }
     end
 
     context "with excluded images" do
@@ -27,6 +27,25 @@ describe PendingImage::Collection do
         all_pending_images.should include(image)
       end
     end
+  end
+
+  describe "#save!" do
+    subject { Image.all }
+    context "with valid images" do
+      before(:each) do
+        PendingImage::Collection.new(all_pending_images).save!
+      end
+      it { should eql_image_etags(["etag1", "etag2", "etag3"]) }
+    end
+
+    context "with invalid images" do
+      before(:each) do
+        stub_invalid_json_images_request
+        PendingImage::Collection.new(all_pending_images).save!
+      end
+      it { should be_empty }
+    end
+
   end
 
 end

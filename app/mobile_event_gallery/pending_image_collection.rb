@@ -14,6 +14,12 @@ module PendingImage
       filtered_images.each(&blk)
     end
 
+    def save!
+      each do |image|
+        image.save!
+      end
+    end
+
     private
 
     def images_without_excluded_etags

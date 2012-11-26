@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125102836) do
+ActiveRecord::Schema.define(:version => 20121126170745) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",              :default => "", :null => false
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(:version => 20121125102836) do
     t.string   "photo"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "state"
   end
 
   add_index "images", ["etag"], :name => "index_images_on_etag", :unique => true
+  add_index "images", ["state"], :name => "index_images_on_state"
 
 end
