@@ -46,6 +46,14 @@ describe PendingImage::Collection do
       it { should be_empty }
     end
 
+    context "when importing twice the same images" do
+      before(:each) do
+        PendingImage::Collection.new(all_pending_images).save!
+        PendingImage::Collection.new(all_pending_images).save!
+      end
+      it { should eql_image_etags(["etag1", "etag2", "etag3"]) }
+    end
+
   end
 
 end

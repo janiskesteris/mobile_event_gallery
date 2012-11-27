@@ -7,6 +7,10 @@ module RspecMacros
     stub_json_images_request(open(Rails.root.join('spec/fixtures/invalid_pending_images.json')).read)
   end
 
+  def stub_duplicated_json_images_request
+    stub_json_images_request(open(Rails.root.join('spec/fixtures/duplicated_pending_images.json')).read)
+  end
+
   def stub_empty_json_images_request
     stub_json_images_request("")
   end

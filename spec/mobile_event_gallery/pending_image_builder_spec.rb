@@ -8,8 +8,15 @@ describe PendingImage::Builder do
     before(:each) do
       stub_correct_json_images_request
     end
-    its(:count) { should eql(3) }
     it { should eql_image_etags(["etag1", "etag2", "etag3"]) }
+  end
+
+  context "with existing image in DB" do
+    before(:each) do
+      stub_correct_json_images_request
+      Fabricate(:image, etag: "etag2")
+    end
+    it { should eql_image_etags(["etag1", "etag3"]) }
   end
 
   context "with empty JSON response" do
@@ -25,4 +32,12 @@ describe PendingImage::Builder do
     end
     it { should be_empty }
   end
+
+  context "with duplicated image entries" do
+    before(:each) do
+      stub_duplicated_json_images_request
+    end
+    it { should eql_image_etags(["etag1"]) }
+  end
+
 end

@@ -26,6 +26,10 @@ module FeatureMacros
     end
   end
 
+  def have_image(image_path)
+    have_css("img[contains(src, '#{image_path}')]")
+  end
+
 end
 
 RSpec.configuration.include FeatureMacros, :type => :feature

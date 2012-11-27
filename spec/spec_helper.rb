@@ -23,9 +23,9 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
-  config.before do
+  config.before(:each) do
     WebMock.disable_net_connect!(allow: /127.0.0.1/)
-    stub_request(:get, "http://fakeimage.com/image.jpg").to_return(body: File.open(Rails.root.join('spec/fixtures/test.jpg')))
+    stub_request(:get, /.*\.jpg.*/).to_return(body: File.open(Rails.root.join('spec/fixtures/test.jpg')))
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

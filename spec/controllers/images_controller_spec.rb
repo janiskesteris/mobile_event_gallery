@@ -54,7 +54,7 @@ describe ImagesController do
     it "should delete image record" do
       delete :destroy, admin_id: admin, id: image, format: 'js'
       response.response_code.should == 200
-      assigns[:image].destroyed?.should be_true
+      assigns[:image].state.should eql("rejected")
       response.should render_template('destroy')
     end
   end

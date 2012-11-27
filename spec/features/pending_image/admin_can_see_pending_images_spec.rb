@@ -8,23 +8,31 @@ feature "As an authenticated Admin" do
 
   background do
     stub_empty_json_images_request
-    PendingImage::Builder.any_instance.stub(:images) { pending_images }
     visit new_admin_image_path(admin_id: signed_in_admin)
   end
 
-  scenario "I can see pending images" do
+  scenario "I can see pending images", js: true do
+    PendingImage::Builder.any_instance.stub(:images) { pending_images }
+    click_link "Load new images"
+
     pending_images.each do |pending_image|
-      page.should have_xpath("//img[contains(@src, '#{pending_image.photo.list.url}')]")
+      page.should have_image(pending_image.photo.list.url)
     end
   end
 
-  scenario "I should not see processed images" do
-    processed_images.each do |pending_image|
-      page.should_not have_xpath("//img[contains(@src, '#{pending_image.photo.list.url}')]")
+  scenario "I should not see processed images", js: true do
+    PendingImage::Builder.any_instance.stub(:images) { processed_images }
+    click_link "Load new images"
+
+    processed_images.each do |processed_image|
+      page.should_not have_image(processed_image.photo.list.url)
     end
   end
 
-  scenario "I should see text if there are pending images" do
+  scenario "I should see text if there are pending images", js: true do
+    PendingImage::Builder.any_instance.stub(:images) { pending_images }
+    click_link "Load new images"
+
     page.should have_content("Newest unapproved images")
   end
 

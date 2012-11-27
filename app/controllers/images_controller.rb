@@ -3,7 +3,12 @@ class ImagesController < ApplicationController
   load_resource
 
   def new
-    @pending_images = Image.fetch_and_store_remote! and Image.unprocessed
+    respond_to do |format|
+      format.js {
+        Image.fetch_and_store_remote! and @pending_images = Image.unprocessed
+      }
+      format.html { @pending_images = Image.unprocessed }
+    end
   end
 
   def update
@@ -11,6 +16,6 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    @image.destroy
+    @image.update_attribute(:state, "rejected")
   end
 end

@@ -8,6 +8,7 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'sqlite3'
+gem 'mysql2'
 
 gem 'jquery-rails'
 

@@ -12,15 +12,6 @@ describe Image do
       its(:valid?) { should be_false }
     end
 
-    context "with unsanitized attributes" do
-      let(:time_now) { Time.parse("Sun, 25 Nov 2012 12:14:32 UTC +00:00") }
-      subject { Fabricate.build :image, uploaded_at: "\'#{time_now.to_s}\'", etag: "\"etag\"", content_type: "\"content_type\"" }
-
-      its(:uploaded_at) { should eql(time_now) }
-      its(:etag) { should eql("etag") }
-      its(:content_type) { should eql("content_type") }
-    end
-
     context "with saved image object" do
       let(:modified_image) do
         image = Fabricate :image
@@ -51,6 +42,7 @@ describe Image do
     end
 
     context "with non existing image url" do
+      subject { Fabricate.build(:image, url: "sdadasdasd").import_remote_photo! }
       it { should be_false }
     end
 
@@ -107,6 +99,18 @@ describe Image do
     end
 
     its(:all) { should eql([pending_image]) }
+  end
+
+  describe "#image_url_without_params" do
+    context "with no query params" do
+      subject { Fabricate(:image, url: "http://fakeimage.com/image.jpg").image_url_without_params }
+      it { should eql("http://fakeimage.com/image.jpg") }
+    end
+
+    context "with query params" do
+      subject { Fabricate(:image, url: "http://fakeimage.com/image.jpg?param1=2&param2=1").image_url_without_params }
+      it { should eql("http://fakeimage.com/image.jpg?") }
+    end
   end
 
 end

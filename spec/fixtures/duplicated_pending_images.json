@@ -1,0 +1,26 @@
+[
+  {
+    "x-amz-id-2":"EVmWBQZGHe6XNhgAdgmndb8yveedSjfEuIB6QX/lN7HIeb+eFeRPNauXoTAwg4FK",
+    "x-amz-request-id":"57BC2F0850D77028",
+    "date":"Sat, 24 Nov 2012 15:29:44 GMT",
+    "last-modified":"Tue, 28 Feb 2012 15:04:22 GMT",
+    "etag":"\"etag1\"",
+    "accept-ranges":"bytes",
+    "content-type":"binary/octet-stream",
+    "content-length":"1687517",
+    "server":"AmazonS3",
+    "url":"http://fakeimage.com/image.jpg"
+  },
+  {
+    "x-amz-id-2":"Z4z1PluJ63VWMTndqnM5gZU1Pw4bkwwz4bPpunY+P1PASMd8RQFYC2D1xq0mnc0h",
+    "x-amz-request-id":"08B742C175C1239C",
+    "date":"Sat, 24 Nov 2012 15:29:44 GMT",
+    "last-modified":"Mon, 05 Mar 2012 15:12:57 GMT",
+    "etag":"\"etag1\"",
+    "accept-ranges":"bytes",
+    "content-type":"binary/octet-stream",
+    "content-length":"1520807",
+    "server":"AmazonS3",
+    "url":"http://fakeimage.com/image.jpg"
+  }
+]

@@ -3,12 +3,13 @@ require 'spec_helper'
 feature "As an authenticated Admin" do
 
   given(:signed_in_admin) { create_and_sign_in_admin }
-  given(:pending_images) { [Fabricate.build(:image), Fabricate.build(:image), Fabricate.build(:image)] }
+  given(:pending_images) { [Fabricate(:image), Fabricate(:image), Fabricate(:image)] }
 
   background do
     stub_empty_json_images_request
-    PendingImage::Builder.any_instance.stub(:images) { pending_images }
+    Image.stub(:fetch_and_store_remote!) { pending_images }
     visit new_admin_image_path(admin_id: signed_in_admin)
+    click_link "Load new images"
   end
 
   scenario "I can approve pending images", js: true do
