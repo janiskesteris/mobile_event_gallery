@@ -3,8 +3,8 @@ require 'spec_helper'
 feature "As an authenticated Admin" do
 
   given(:signed_in_admin) { create_and_sign_in_admin }
-  given(:pending_images) { [Fabricate.build(:image), Fabricate.build(:image), Fabricate.build(:image)] }
-  given(:processed_images) { [Fabricate.build(:image, state: "approved"), Fabricate.build(:image, state: "rejected")] }
+  given(:pending_images) { [Fabricate(:image), Fabricate(:image), Fabricate(:image)] }
+  given(:processed_images) { [Fabricate(:image, state: "approved"), Fabricate(:image, state: "rejected")] }
 
   background do
     stub_empty_json_images_request
@@ -12,25 +12,25 @@ feature "As an authenticated Admin" do
   end
 
   scenario "I can see pending images", js: true do
-    PendingImage::Builder.any_instance.stub(:images) { pending_images }
+    pending_images
     click_link "Load new images"
 
     pending_images.each do |pending_image|
-      page.should have_image(pending_image.photo.list.url)
+      should_have_image(pending_image.photo.list.url)
     end
   end
 
   scenario "I should not see processed images", js: true do
-    PendingImage::Builder.any_instance.stub(:images) { processed_images }
+    processed_images
     click_link "Load new images"
 
     processed_images.each do |processed_image|
-      page.should_not have_image(processed_image.photo.list.url)
+      should_not_have_image(processed_image.photo.list.url)
     end
   end
 
   scenario "I should see text if there are pending images", js: true do
-    PendingImage::Builder.any_instance.stub(:images) { pending_images }
+    pending_images
     click_link "Load new images"
 
     page.should have_content("Newest unapproved images")

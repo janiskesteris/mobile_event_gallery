@@ -1,0 +1,6 @@
+= approved_image_list_title
+%ul.thumbnails
+  - @approved_images.each do |image|
+    %li.span3{id: "image_block_#{image.id}"}
+      .thumbnail
+        = link_to image_tag(image.photo.list.url, height: "100"), image_path(image)

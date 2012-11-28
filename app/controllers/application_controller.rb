@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_unauthorized
-    render file: "#{Rails.root}/public/401.html", status: :unauthorized, layout: false
+    render "#{Rails.root}/public/401", status: :unauthorized, layout: false, :format => :html
   end
 end

@@ -25,6 +25,16 @@ describe ImagesController do
         response.response_code.should == 401
       end
 
+      it "should be able to access approved image list" do
+        get :index
+        response.response_code.should == 200
+      end
+
+      it "should be able to access approved image" do
+        get :show, id: image
+        response.response_code.should == 200
+      end
+
     end
 
     context "when visiting as Admin" do
@@ -37,11 +47,28 @@ describe ImagesController do
     end
   end
 
+  describe "#index" do
+    let(:image) { Fabricate :image, state: "approved" }
+    before(:each) do
+      @expected = [{
+                       id: image.id,
+                       uploaded_at: image.uploaded_at,
+                       photo_url: image.photo_url
+                   }].to_json
+    end
+
+    it "should respond to JSON request" do
+      get :index, format: :json
+      response.response_code.should == 200
+      response.body.should == @expected
+    end
+  end
+
   describe "#update" do
     let(:admin) { create_and_sign_in_admin }
 
     it "should change images state" do
-      put :update, admin_id: admin, id: image, image: {state: "approved"}, format: 'js'
+      put :update, admin_id: admin, id: image, image: {state: "approved"}, format: :js
       response.response_code.should == 200
       assigns[:image].state.should eql("approved")
       response.should render_template('update')
@@ -52,7 +79,7 @@ describe ImagesController do
     let(:admin) { create_and_sign_in_admin }
 
     it "should delete image record" do
-      delete :destroy, admin_id: admin, id: image, format: 'js'
+      delete :destroy, admin_id: admin, id: image, format: :js
       response.response_code.should == 200
       assigns[:image].state.should eql("rejected")
       response.should render_template('destroy')

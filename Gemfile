@@ -10,6 +10,9 @@ gem 'mini_magick'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'twitter'
+gem 'delayed_job_active_record'
+gem "daemons"
+gem "thin"
 
 gem 'jquery-rails'
 

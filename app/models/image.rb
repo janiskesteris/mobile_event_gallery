@@ -3,8 +3,13 @@ class Image < ActiveRecord::Base
 
   mount_uploader :photo, PhotoUploader
   scope :unprocessed, where(state: :pending)
+  scope :approved, where(state: :approved)
 
-  after_save :update_twitter_if_approved
+  after_save do
+    self.delay.update_twitter_if_approved if state == "approved" && !shared_on_twitter?
+  end
+
+  MAX_RETRY_COUNT_FOR_STATUS_UPDATE = 10
 
 
   def import_remote_photo!
@@ -19,7 +24,24 @@ class Image < ActiveRecord::Base
   end
 
   def update_twitter_if_approved
-    Twitter.update_with_media("", File.new(photo.path)) if state == "approved" && !shared_on_twitter?
+    tries = 0
+    begin
+      Twitter.update_with_media("", File.new(photo.path))
+    rescue Twitter::Error::Forbidden
+      if tries < MAX_RETRY_COUNT_FOR_STATUS_UPDATE
+        sleep 5
+        tries += 1
+        retry
+      end
+    end
+  end
+
+  def photo_url
+    Rails.configuration.domain+photo.url
+  end
+
+  def as_json(options={})
+    {id: id, uploaded_at: uploaded_at, photo_url: photo_url}
   end
 
   class << self

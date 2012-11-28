@@ -26,8 +26,16 @@ module FeatureMacros
     end
   end
 
-  def have_image(image_path)
-    have_css("img[contains(src, '#{image_path}')]")
+  def should_have_image(image_path)
+    page.should have_css("img[src='#{image_path}']")
+  end
+
+  def should_not_have_image(image_path)
+    page.should_not have_css("img[src='#{image_path}']")
+  end
+
+  def click_image_link image_path
+    find(:xpath, "//a/img[@src='#{image_path}']/..").click
   end
 
 end

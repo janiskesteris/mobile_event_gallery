@@ -24,6 +24,7 @@ RSpec.configure do |config|
   # config.mock_with :rr
 
   config.before(:each) do
+    Delayed::Worker.delay_jobs = false
     WebMock.disable_net_connect!(allow: /127.0.0.1/)
     stub_request(:get, /.*\.jpg.*/).to_return(body: File.open(Rails.root.join('spec/fixtures/test.jpg')))
     stub_request(:post, "https://api.twitter.com/1.1/statuses/update_with_media.json")

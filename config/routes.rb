@@ -1,10 +1,10 @@
 MobileEventGallery::Application.routes.draw do
   devise_for :admins
 
-  root :to => "approved_images#index"
-  resources :approved_images, only: [:index, :show]
+  root :to => "images#index"
+  resources :images, only: [:index, :show]
   resources :admins, only: [] do
-    resources :images
+    resources :images, except: [:index, :show]
   end
 
   # The priority is based upon order of creation:

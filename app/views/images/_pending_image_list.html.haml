@@ -1,13 +1,12 @@
-- if pending_images.empty?
-  %h1 There are no new images
-- else
-  %h1 Newest unapproved images
+= pending_image_list_title
 %ul.thumbnails
   - pending_images.each do |image|
     %li.span3{id: "image_block_#{image.id}"}
       .thumbnail
-        = link_to image_tag(image.photo.list.url, height: "100"), image.photo.url
+        = link_to image_tag(image.photo.list.url), image.photo.url
         = simple_form_for([admin, image], remote: true) do |form|
           = form.hidden_field :state, value: "approved"
-          = form.submit "Approve"
-          = link_to "Reject", admin_image_path(admin_id: admin, id: image), remote: true, method: "DELETE"
+          = form.submit "Approve", class: "btn btn-success approve-button"
+          = link_to "Reject", admin_image_path(admin_id: admin, id: image), remote: true, method: "DELETE", class: "btn btn-danger reject-button"
+.well
+  =link_to "Load new images", new_admin_image_path(admin_id: @admin), remote: true, class: "btn btn-large btn-block btn-primary", id: "download-images-link", data: {"loading-text" => "Downloading images please wait it might take a while..."}

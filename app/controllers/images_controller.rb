@@ -1,6 +1,17 @@
 class ImagesController < ApplicationController
-  load_and_authorize_resource :admin
+  load_and_authorize_resource :admin, except: [:index, :show]
   load_resource
+
+  def index
+    @approved_images = Image.approved
+    respond_to do |format|
+      format.html
+      format.json { render json: @approved_images }
+    end
+  end
+
+  def show
+  end
 
   def new
     respond_to do |format|
