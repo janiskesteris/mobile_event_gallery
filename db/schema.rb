@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126183627) do
+ActiveRecord::Schema.define(:version => 20121127201838) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",              :default => "", :null => false
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(:version => 20121126183627) do
     t.string   "content_type"
     t.string   "url"
     t.string   "photo"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.string   "state",        :default => "pending"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "state",             :default => "pending"
+    t.boolean  "shared_on_twitter", :default => false
   end
 
   add_index "images", ["etag"], :name => "index_images_on_etag", :unique => true

@@ -4,5 +4,6 @@ Fabricator(:image) do
   content_type "image/jpeg"
   url "http://fakeimage.com/image.jpg"
   state "pending"
+  shared_on_twitter true
   after_build { |image| image.import_remote_photo! }
 end

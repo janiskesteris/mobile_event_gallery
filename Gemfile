@@ -9,6 +9,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'sqlite3'
 gem 'mysql2'
+gem 'twitter'
 
 gem 'jquery-rails'
 

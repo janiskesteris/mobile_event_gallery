@@ -113,4 +113,36 @@ describe Image do
     end
   end
 
+  describe "#after save" do
+    subject { Fabricate :image, shared_on_twitter: false }
+    before(:each) do
+      PhotoUploader.any_instance.stub(:path) { File.new(Rails.root.join('spec/fixtures/test.jpg')) }
+    end
+
+    context "with approved state and image not shared on twitter" do
+      it "should update twitter status" do
+        Twitter.should_receive(:update_with_media).with("", kind_of(File)).once
+        subject.state = "approved"
+        subject.save
+      end
+    end
+
+    context "with rejected state and not shared on twitter " do
+      it "should not update twitter status when rejected" do
+        Twitter.should_not_receive(:update_with_media).with("", kind_of(File))
+        subject.update_attributes(state: "rejected")
+      end
+    end
+
+    context "when already been shared on twitter " do
+      subject { Fabricate :image, shared_on_twitter: true }
+
+      it "should not update twitter status when rejected" do
+        Twitter.should_not_receive(:update_with_media).with("", kind_of(File))
+        subject.update_attributes(state: "approved")
+      end
+    end
+
+  end
+
 end

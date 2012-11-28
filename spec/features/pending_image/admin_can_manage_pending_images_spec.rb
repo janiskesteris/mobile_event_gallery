@@ -7,8 +7,8 @@ feature "As an authenticated Admin" do
 
   background do
     stub_empty_json_images_request
-    Image.stub(:fetch_and_store_remote!) { pending_images }
     visit new_admin_image_path(admin_id: signed_in_admin)
+    pending_images
     click_link "Load new images"
   end
 
@@ -19,7 +19,7 @@ feature "As an authenticated Admin" do
     end
   end
 
-  scenario "I can destroy pending images", js: true do
+  scenario "I can reject pending images", js: true do
     pending_images.each do |pending_image|
       click_reject_button(pending_image)
       page.should have_content("Rejected!")
