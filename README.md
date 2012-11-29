@@ -4,11 +4,12 @@ Mobile Event Gallery
 Notes
 ===============
 `git clone git://github.com/janiskesteris/mobile_event_gallery.git`  
+`cd ./mobile_event_gallery`  
 `bundle install`  
 `rake db:setup`  
 `rake db:test:clone`  
 `rspec`  
-`script/delayed_job start`  
+`ruby ./script/delayed_job start`  
 `rails s` 
 
 Authentication
