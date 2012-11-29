@@ -143,6 +143,18 @@ describe Image do
       end
     end
 
+    context "when failing with error Twitter::Error::Forbidden" do
+      before(:each) do
+        Twitter.stub(:update_with_media) { raise Twitter::Error::Forbidden }
+      end
+
+      it "should retry update_with_media" do
+        Twitter.should_receive(:update_with_media).exactly(11).times
+        subject.update_attributes(state: "approved")
+      end
+
+    end
+
   end
 
 end

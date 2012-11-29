@@ -29,7 +29,6 @@ class Image < ActiveRecord::Base
       Twitter.update_with_media("", File.new(photo.path))
     rescue Twitter::Error::Forbidden
       if tries < MAX_RETRY_COUNT_FOR_STATUS_UPDATE
-        sleep 5
         tries += 1
         retry
       end
